@@ -6,9 +6,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.yaml.snakeyaml.Yaml;
-
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URL;
@@ -19,12 +16,15 @@ import java.net.URL;
 public class MainClass {
 
     public static void main( String[] args ) throws Exception {
-        String pathCategory = "d:\\temp\\category.csv";
-        String pathOffers = "d:\\temp\\offers.csv";
-        UParser parser = new UParser(new URL("http://pellecon.ru/bitrix/catalog_export/wikimart.php"));
+        String xmlUrl = args[0];
+        String pathCategory = args[1];
+        String pathOffers = args[2];
+//        String xmlUrl = "http://pellecon.ru/bitrix/catalog_export/wikimart.php";
+//        String pathCategory = "d:\\temp\\category.csv";
+//        String pathOffers = "d:\\temp\\offers.csv";
+        UParser parser = new UParser(new URL(xmlUrl));
         Element root = parser.getRootel();
         NodeList nl = root.getChildNodes();
-
         Node categories = UParser.searchNode(root,"categories");
         Node offers = UParser.searchNode(root,"offers");
         NodeList list = categories.getChildNodes();
@@ -56,9 +56,6 @@ public class MainClass {
                 FileUtils.writeFile(pathOffers,id+";"+available+";"+url+";"+price+";"+currencyId+";"+categoryId+";"+picture+";"+name+";"+description+";\n",true);
             }
         }
-
-
-
     }
 
 

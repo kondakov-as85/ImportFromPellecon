@@ -17,11 +17,6 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
-        <repository>
-            <id>Sonatype-public</id>
-            <name>SnakeYAML repository</name>
-            <url>http://oss.sonatype.org/content/groups/public/</url>
-        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -29,12 +24,36 @@
             <artifactId>ExtUtils</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.15-SNAPSHOT</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <addExtensions>false</addExtensions>
+                            <mainClass>com.mycomp.ImportFromPellecon.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <finalName>importPellecon</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven.examples</groupId>
+                <artifactId>clean-maven-plugin</artifactId>
+                <version>1.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
