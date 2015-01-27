@@ -38,7 +38,6 @@ public class MainClass {
                 FileUtils.writeFile(pathCategory,id+";"+parentId+";"+name+";\n",true);
             }
         }
-
         list = offers.getChildNodes();
         FileUtils.writeFile(pathOffers, "id;available;Name;url;price;currencyId;categoryId;picture;name;description;\n", false);
         for(int i=0; i<list.getLength(); i++) {
@@ -57,23 +56,4 @@ public class MainClass {
             }
         }
     }
-
-
-
-    public static Element ParserByUrl(URL url) throws Exception {
-        Element rootel = null;
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setIgnoringComments(true);
-        factory.setCoalescing(true); // Convert CDATA to Text nodes
-        factory.setNamespaceAware(false); // No namespaces: this is default
-        factory.setValidating(false);
-        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
-
-        DocumentBuilder parser = factory.newDocumentBuilder();
-        Document doc = parser.parse(url.openStream());
-        rootel = doc.getDocumentElement(); // корневой элемент документа//
-        return rootel;
-    }
-
-
 }
